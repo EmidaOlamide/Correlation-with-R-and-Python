@@ -1,0 +1,144 @@
+---
+title: "Correlation_R"
+author: "Olamide Emida"
+date: '2022-07-19'
+output: html_document
+---
+
+## correlation with R
+
+**Data set Name** : Movies.csv  
+**Data source**: Click [here](https://www.kaggle.com/datasets/danielgrijalvas/movies)
+
+### Tasks
+
+1. Do budgets on the movies affect the revenue generated from the movies?
+2. Do movies' scores affect the revenue generated from the movies?
+3. Do movies' rating affect the revenue generated from the movies?
+4. What other relationships can be shown?
+
+### Setting up my R environment by loading the following libraries
+
+```{r loading packages, warning=FALSE}
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(here)
+library(ggcorrplot)
+require(scales)
+```
+
+### Import movies dataset
+
+```{r Importing movies dataset, warning=FALSE}
+movies_df = read_csv('movies.csv')
+```
+
+### Scrutinizing the data
+
+**View the data**
+```{r View the data}
+View(movies_df)
+```
+
+**The data type of each column**
+```{r The data type of each column}
+glimpse(movies_df)
+```
+
+**The shape of the data**
+```{r The shape of the data}
+dim(movies_df)
+```
+
+**The 15 columns of the data**
+```{r The 15 columns of the data}
+colnames(movies_df)
+```
+
+### Data Cleaning
+
+### remove rows with null values
+
+**rows with null values**
+```{r rows with null values}
+movies_df %>% 
+  filter(if_any(everything(),is.na))
+```
+
+**drop rows with null values and return shape of the new data**
+```{r drop rows with null values and return shape of the new data}
+new_movies_df <- na.omit(movies_df)
+dim(new_movies_df)
+```
+
+### Data Visualizations
+
+### Task 1: Movies Budget Vs Revenue
+
+```{r Correlation between Budget Vs Revenue, warning=FALSE}
+ggplot(new_movies_df, aes(x = gross, y = budget))+
+  geom_point(color = "Blue")+
+  geom_smooth()+
+  labs(title = "Movies Revenue Vs Budget", x = "Gross", Y = "Budget")+
+  scale_x_continuous(labels = unit_format(unit = "B", scale = 1e-9))+
+  scale_y_continuous(labels = unit_format(unit = "B", scale = 1e-9))
+```
+
+**There is a positive relationship between movies revenue and budget: as budget increases, revenue also increases**
+
+### Task 2: Movies Score Vs Revenue
+
+```{r Correlation between movies score Vs Revenue, warning=FALSE}
+ggplot(new_movies_df, aes(x = score, y = gross))+
+  geom_point(color = "Blue")+
+  geom_smooth(color = "Red")+
+  labs(title = "Movies Revenue Vs Score", x = "Score", Y = "Gross")+
+  scale_y_continuous(labels = unit_format(unit = "B", scale = 1e-9))
+```
+
+**There is a negative relationship between movies revenue and score**
+
+### Task 3: Movies rating Vs Revenue
+
+```{r Correlation between Movies rating Vs Revenue, warning=FALSE}
+ggplot(data = new_movies_df)+
+  geom_boxplot(mapping = aes(x = rating, y = gross, color = rating))+
+  labs(title = 'Movies rating Vs Revenue')+
+  theme(legend.position = "none")+
+  scale_y_continuous(labels = unit_format(unit = "B", scale = 1e-9))
+```
+
+**As median and max value for each category is close to 0, there is no relationship between movies revenue and rating**
+
+### Task 4: Other relationships in the data
+
+**Create a new data set for numeric features**
+
+```{r Create a new data set for numeric features}
+numeric_features = new_movies_df %>% 
+  select(year,score,votes,budget,gross,runtime)
+head(numeric_features)
+```
+
+**Correlation matrix for the numerical features**
+
+```{r Correlation matrix for the numerical features}
+movie_correlation = round(cor(numeric_features),2)
+head(movie_correlation)
+```
+
+**Showing the correlation as a heatmap**
+
+```{r Showing the correlation as a heatmap, warning=FALSE}
+ggcorrplot(movie_correlation, lab = TRUE, show.legend = FALSE, title = "Correlation Matrix for Numerical Features")
+```
+
+### Conclusion
+* There is a positive relationship between movies revenue and budget: as budget increases, revenue also increases
+* There is a negative relationship between movies revenue and score.
+* There is no relationship between movies revenue and rating
+
+
+
+

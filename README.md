@@ -11,6 +11,8 @@ I answered the following questions using R and Python:
 
 I got the data from [here](https://www.kaggle.com/datasets/danielgrijalvas/movies)
 
+You can view the R version on kaggle [here](https://www.kaggle.com/code/emidaolamide/movies-correlation-r)
+
 Read my codes and have fun.
 
 Your feedback will be greatly appreciated.

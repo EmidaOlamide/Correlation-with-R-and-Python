@@ -1,8 +1,10 @@
 # Correlation-with-R-and-Python
 
+This is a movies dataset. The data contains 7668 rows and 15 columns. 
+
 In this correlation project, I showcased my Python skills.
 
-I answered the following questions using R and Python:
+I answered the following questions using Python:
 
 * Do budgets on the movies affect the revenue generated from the movies?
 * Do movies’ scores affect the revenue generated from the movies?

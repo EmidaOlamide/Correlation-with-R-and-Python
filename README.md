@@ -1,6 +1,6 @@
 # Correlation-with-R-and-Python
 
-In this correlation project, I showcased my R and Python skills.
+In this correlation project, I showcased my Python skills.
 
 I answered the following questions using R and Python:
 
@@ -11,9 +11,7 @@ I answered the following questions using R and Python:
 
 I got the data from [here](https://www.kaggle.com/datasets/danielgrijalvas/movies)
 
-You can view the R version on kaggle [here](https://www.kaggle.com/code/emidaolamide/movies-correlation-r)
-
-Read my codes and have fun.
+I answered the same questions using R. You can view the R version on kaggle [here](https://www.kaggle.com/code/emidaolamide/movies-correlation-r)
 
 Your feedback will be greatly appreciated.
 
